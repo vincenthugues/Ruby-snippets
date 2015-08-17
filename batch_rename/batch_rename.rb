@@ -31,6 +31,26 @@ def rename_files(directory, extension, prefix)
 	puts "Renamed " + n.to_s + " files"
 end
 
-user_input = prompt_user
+def batch_rename()
+	directory, extension, prefix = "", "", ""
 
-rename_files *user_input
+	if not [0, 3].include? ARGV.length
+		puts "Usage: ruby batch_rename.rb [directory extension prefix]"
+		return
+	end
+	
+	if ARGV.length == 3
+		directory = ARGV.shift
+		extension = ARGV.shift
+		prefix = ARGV.shift
+	end
+
+	if directory.empty? or extension.empty? or prefix.empty?
+		user_input = prompt_user
+		rename_files *user_input
+	else
+		rename_files directory, extension, prefix
+	end
+end
+
+batch_rename
