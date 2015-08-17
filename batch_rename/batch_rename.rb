@@ -1,7 +1,6 @@
 def prompt_user()
 	print 'Directory: '
 	directory = gets.strip
-	directory << '/' unless directory.end_with?('/')
 
 	print 'File extension (ex: .jpg): '
 	extension = gets.strip
@@ -13,6 +12,17 @@ def prompt_user()
 end
 
 def rename_files(directory, extension, prefix)
+	# Expand the path in case it points inside the user's home directory
+	directory = File.expand_path(directory)
+	# Ensure the directory ends with a slash
+	directory << '/' unless directory.end_with?('/')
+	
+	# Check that the directory exists
+	if not Dir.exists? directory
+		puts "Directory \"#{directory}\" not found"
+		return
+	end
+	
 	n = 0
 	Dir[directory + '*'].each do |f|
 		next if File.directory? f
@@ -32,20 +42,20 @@ def rename_files(directory, extension, prefix)
 end
 
 def batch_rename()
-	directory, extension, prefix = "", "", ""
+	directory, extension, prefix = '', '', ''
 
 	if not [0, 3].include? ARGV.length
-		puts "Usage: ruby batch_rename.rb [directory extension prefix]"
+		puts 'Usage: ruby batch_rename.rb [directory extension prefix]'
 		return
 	end
 	
 	if ARGV.length == 3
-		directory = ARGV.shift
-		extension = ARGV.shift
-		prefix = ARGV.shift
+		directory = ARGV.shift.strip
+		extension = ARGV.shift.strip
+		prefix = ARGV.shift.strip
 	end
 
-	if directory.empty? or extension.empty? or prefix.empty?
+	if directory.empty? or extension.empty?
 		user_input = prompt_user
 		rename_files *user_input
 	else
