@@ -45,7 +45,7 @@ def batch_rename()
 	directory, extension, prefix = '', '', ''
 
 	if not [0, 3].include? ARGV.length
-		puts 'Usage: ruby batch_rename.rb [directory extension prefix]'
+		puts 'Usage: ruby batch_rename.rb [ directory extension [prefix] ]'
 		return
 	end
 	
