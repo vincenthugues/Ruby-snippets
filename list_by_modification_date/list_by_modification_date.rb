@@ -13,10 +13,11 @@ def list_files(directory)
 		end
 	end
 	
-	Dir[directory + '*'].sort_by {|f| File.mtime f }.each {|f| puts f}
+	Dir[directory + '*'].sort_by { |f| File.mtime f }.each { |f| puts File.mtime(f).to_s + "\t" + f }
 end
 
 def list_by_modification_date()
+	# Use the current directory by default
 	directory = ''
 
 	if ARGV.length == 1
