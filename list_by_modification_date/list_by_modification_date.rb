@@ -16,7 +16,7 @@ def list_files(directory, options)
 	
 	Dir[directory + '*'].sort_by { |f| File.mtime f }.each do |f|
 		s = ''
-		s += File.mtime(f).to_s + "\t"
+		s += File.mtime(f).to_s + "\t" unless options[:time] != true
 		puts s + f
 	end
 end
