@@ -1,12 +1,14 @@
-require_relative('parser')
+class Graph
+  def initialize
+    @vertices = []
+    @edges = []
+  end
 
-def main
-  parser = Parser.new
+  def add_vertex(name, x, y)
+    return
+  end
 
-  parser.add_section('Vertices', /vertex (.*)/)
-  parser.add_section('Edges', /edge (.*)/)
-
-  parser.print_sections('input/test1.txt')
+  def add_edge(src, dest, weight)
+    return
+  end
 end
-
-main
