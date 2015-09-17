@@ -1,0 +1,6 @@
+vertex Abc 0 0
+vertex Def 5 6
+vertex Ghi 2 -1
+edge Abc Def 4
+edge Abc Ghi 3
+edge Def Ghi 5
