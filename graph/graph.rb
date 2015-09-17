@@ -3,11 +3,14 @@ require_relative('vertex')
 class Graph
   Edge = Struct.new(:src, :dest, :weight)
   
-  def initialize
+  attr_accessor :type
+  
+  def initialize(graph_type=:undirected)
+    @type = graph_type
     @vertices = []
     @edges = []
   end
-
+  
   def add_vertex(name, x, y)
     @vertices << Vertex.new(name, x, y)
   end
