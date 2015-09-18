@@ -11,27 +11,19 @@ class Parser
     File.open(path).each { |line| puts line }
   end
 
-  def match_pattern(line, section)
-    vertex_line = /vertex\s+(?<Name>\S+)\s+(?<XCoordinate>\d+)\s+(?<YCoordinate>\d+)/
-    edge_line = /edge\s+(?<Origin>\S+)\s+(?<Destination>\S+)\s+(?<Weight>\d+)/
+  def match_pattern(line, pattern)
+    line.match(pattern) { |results| return results.to_a }
     
-    parts = line.match(vertex_line)
-    
-    if parts then
-      puts "Parts: ", parts
-
-      # puts "
-      #   Name: #{parts['Name']}
-      #   X: #{parts['XCoordinate']}
-      #   Y: #{parts['YCoordinate']}".strip
-    end
+    # puts "
+    #   Name: #{parts['Name']}
+    #   X: #{parts['XCoordinate']}
+    #   Y: #{parts['YCoordinate']}".strip
   end
 
   def get_data(path)
     # Create the arrays to hold the results for each section
     sectionsResults = {}
     @sections.each do |section|
-      #sectionsResults << Struct.new(:name, :results).new(section.name, [])
       sectionsResults[section.name] = []
     end
 
@@ -42,9 +34,10 @@ class Parser
         # For each "section" to populate
         @sections.each do |section|
           # If there is a match, store the results
-          #line.match(section.pattern) { |results| sectionsResults[section.name] = results }
-          line.match(section.pattern) { |result| sectionsResults[section.name] << result[1] }
-          #match_pattern(line, section)
+          results = match_pattern(line, section.pattern)
+          if results then
+            sectionsResults[section.name] << results
+          end
         end
       end
     end
@@ -58,7 +51,7 @@ class Parser
     # Display the results
     sectionsResults.each_pair do |section_name, results|
       puts section_name + ':'
-      results.each { |result| puts ' ' * 4 + result }
+      results.each { |line| puts ' ' * 4 + line[1..3].to_s }
     end
   end
 end
