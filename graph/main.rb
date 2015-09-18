@@ -11,11 +11,11 @@ def main
 
   parser.add_section(
     'Vertices',
-    /vertex\s+(?<Name>\S+)\s+(?<XCoordinate>\d+)\s+(?<YCoordinate>\d+)/)
+    /vertex\s+(?<Name>\S+)\s+(?<XCoordinate>-?\d+)\s+(?<YCoordinate>-?\d+)/)
   
   parser.add_section(
     'Edges',
-    /edge\s+(?<Origin>\S+)\s+(?<Destination>\S+)\s+(?<Weight>\d+)/)
+    /edge\s+(?<Origin>\S+)\s+(?<Destination>\S+)\s+(?<Weight>-?\d+)/)
 
   parser.print_sections('input/test1.txt')
 end

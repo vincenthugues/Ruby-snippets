@@ -13,11 +13,6 @@ class Parser
 
   def match_pattern(line, pattern)
     line.match(pattern) { |results| return results.to_a }
-    
-    # puts "
-    #   Name: #{parts['Name']}
-    #   X: #{parts['XCoordinate']}
-    #   Y: #{parts['YCoordinate']}".strip
   end
 
   def get_data(path)
