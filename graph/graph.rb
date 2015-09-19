@@ -51,6 +51,14 @@ class Graph
   end
 
   def add_edge(src, dest, weight = 0)
-    @edges << Struct.new(:src, :dest, :weight).new(src, dest, weight)
+    @edges << Edge.new(src, dest, weight)
+  end
+  
+  def print_vertices
+    @vertices.each { |vertex| puts "[Vertex] name:\"#{vertex.name}\", x:#{vertex.x}, y:#{vertex.y}" }
+  end
+  
+  def print_edges
+    @edges.each { |edge| puts "[Edge] from:\"#{edge.src}\", to:\"#{edge.dest}\", weight:#{edge.weight}" }
   end
 end
