@@ -43,7 +43,17 @@ class Graph
         (?<Weight>-?\d+)
       /x)
     
-    parser.print_sections(filename)
+    # Parse the file
+    sectionsResults = parser.get_data(filename)
+    # Store the results
+    sectionsResults.each_pair do |section_name, results|
+      case section_name
+      when 'Vertices'
+        results.each { |line| add_vertex line[1], line[2], line[3] }
+      when 'Edges'
+        results.each { |line| add_edge line[1], line[2], line[3] }
+      end
+    end
   end
   
   def add_vertex(name, x, y)
