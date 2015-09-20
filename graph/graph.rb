@@ -54,14 +54,16 @@ class Graph
         results.each { |line| add_edge line[1], line[2], line[3] }
       end
     end
+    
+    #parser.print_sections(filename)
   end
   
   def add_vertex(name, x, y)
-    @vertices << Vertex.new(name, x, y)
+    @vertices << Vertex.new(name, x.to_i, y.to_i)
   end
 
   def add_edge(src, dest, weight = 0)
-    @edges << Edge.new(src, dest, weight)
+    @edges << Edge.new(src, dest, weight.to_i)
   end
   
   def print_vertices
