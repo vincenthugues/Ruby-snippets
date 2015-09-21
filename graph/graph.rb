@@ -54,8 +54,6 @@ class Graph
         results.each { |line| add_edge line[1], line[2], line[3] }
       end
     end
-    
-    #parser.print_sections(filename)
   end
   
   def add_vertex(name, x, y)

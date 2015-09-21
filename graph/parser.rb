@@ -46,7 +46,7 @@ class Parser
     # Display the results
     sectionsResults.each_pair do |section_name, results|
       puts section_name + ':'
-      results.each { |line| puts ' ' * 4 + line[1..3].to_s }
+      results.each { |line| puts ' ' * 4 + line[1..-1].to_s } # Display all but the first element
     end
   end
 end
