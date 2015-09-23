@@ -68,18 +68,14 @@ class Graph
   end
   
   def generate_adjacency_matrix
-    @adjacency_matrix = []
+    @adjacency_matrix = Array.new(@vertices.count) { Array.new(@vertices.count, 0) }
     
-    # Rows
-    @vertices.count.times do
-      row = []
+    @edges.each do |edge|
+      src_index = @vertices.find_index { |vertex| vertex.name == edge.src }
+      dest_index = @vertices.find_index { |vertex| vertex.name == edge.dest }
       
-      # Columns
-      @vertices.count.times do
-        row << 0
-      end
-      
-      @adjacency_matrix << row
+      @adjacency_matrix[src_index][dest_index] += 1
+      @adjacency_matrix[dest_index][src_index] += 1 unless @type == :directed
     end
   end
   
