@@ -10,7 +10,7 @@ class Graph
     @type = graph_type
     @vertices = []
     @edges = []
-    @matrix = []
+    @adjacency_matrix = []
     
     unless filename.empty? then build_from_file(filename) end
   end
@@ -56,7 +56,7 @@ class Graph
       end
     end
     
-    generate_matrix
+    generate_adjacency_matrix
   end
   
   def add_vertex(name, x, y)
@@ -67,8 +67,8 @@ class Graph
     @edges << Edge.new(src, dest, weight.to_i)
   end
   
-  def generate_matrix
-    @matrix = []
+  def generate_adjacency_matrix
+    @adjacency_matrix = []
     
     # Rows
     @vertices.count.times do
@@ -79,11 +79,12 @@ class Graph
         row << 0
       end
       
-      @matrix << row
+      @adjacency_matrix << row
     end
   end
   
-  def print_matrix
+  def print_adjacency_matrix
+    @adjacency_matrix.each { |row| puts row.inspect }
   end
   
   def print_vertices

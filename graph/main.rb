@@ -10,8 +10,11 @@ def main
   puts 'Vertices:'
   graph.print_vertices
   
-  puts 'Edges:'
+  puts "\nEdges:"
   graph.print_edges
+  
+  puts "\nAdjacency matrix:"
+  graph.print_adjacency_matrix
 end
 
 main
