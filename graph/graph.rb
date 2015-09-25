@@ -1,4 +1,5 @@
 require_relative('vertex')
+require_relative('adjacency_matrix')
 require_relative('parser')
 
 class Graph
@@ -10,7 +11,7 @@ class Graph
     @type = graph_type
     @vertices = []
     @edges = []
-    @adjacency_matrix = []
+    @adjacency_matrix = nil
     
     unless filename.empty? then build_from_file(filename) end
   end
@@ -56,7 +57,7 @@ class Graph
       end
     end
     
-    generate_adjacency_matrix
+    @adjacency_matrix = AdjacencyMatrix.new(@vertices, @edges, @type)
   end
   
   def add_vertex(name, x, y)
@@ -67,20 +68,8 @@ class Graph
     @edges << Edge.new(src, dest, weight.to_i)
   end
   
-  def generate_adjacency_matrix
-    @adjacency_matrix = Array.new(@vertices.count) { Array.new(@vertices.count, 0) }
-    
-    @edges.each do |edge|
-      src_index = @vertices.find_index { |vertex| vertex.name == edge.src }
-      dest_index = @vertices.find_index { |vertex| vertex.name == edge.dest }
-      
-      @adjacency_matrix[src_index][dest_index] += 1
-      @adjacency_matrix[dest_index][src_index] += 1 unless @type == :directed
-    end
-  end
-  
   def print_adjacency_matrix
-    @adjacency_matrix.each { |row| puts row.inspect }
+    @adjacency_matrix.print_matrix
   end
   
   def print_vertices
