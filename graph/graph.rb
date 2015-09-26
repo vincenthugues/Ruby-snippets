@@ -5,10 +5,10 @@ require_relative('parser')
 class Graph
   Edge = Struct.new(:src, :dest, :weight)
   
-  attr_accessor :type
+  attr_accessor :graph_type
   
   def initialize(graph_type=:undirected, filename = '')
-    @type = graph_type
+    @graph_type = graph_type
     @vertices = []
     @edges = []
     @adjacency_matrix = nil
@@ -57,7 +57,7 @@ class Graph
       end
     end
     
-    @adjacency_matrix = AdjacencyMatrix.new(@vertices, @edges, @type)
+    @adjacency_matrix = AdjacencyMatrix.new(@vertices, @edges, @graph_type)
   end
   
   def add_vertex(name, x, y)
