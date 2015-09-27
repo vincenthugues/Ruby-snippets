@@ -1,5 +1,5 @@
 class Vertex
-  attr_accessor :name
+  attr_reader :name
   attr_accessor :x
   attr_accessor :y
   

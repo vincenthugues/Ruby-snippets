@@ -10,6 +10,9 @@ def main
   puts 'Vertices:'
   graph.print_vertices
   
+  puts "\nNodes:"
+  graph.print_nodes
+  
   puts "\nEdges:"
   graph.print_edges
   

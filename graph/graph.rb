@@ -1,3 +1,4 @@
+require_relative('node')
 require_relative('vertex')
 require_relative('adjacency_matrix')
 require_relative('parser')
@@ -5,12 +6,13 @@ require_relative('parser')
 class Graph
   Edge = Struct.new(:src, :dest, :weight)
   
-  attr_accessor :graph_type
+  attr_reader :graph_type
   
   def initialize(graph_type=:undirected, filename = '')
     @graph_type = graph_type
-    @vertices = []
-    @edges = []
+    @nodes = [] # actual graph nodes
+    @vertices = [] # used to store/search
+    @edges = [] # used to store/search
     @adjacency_matrix = nil
     
     unless filename.empty? then build_from_file(filename) end
@@ -62,6 +64,7 @@ class Graph
   
   def add_vertex(name, x, y)
     @vertices << Vertex.new(name, x.to_i, y.to_i)
+    @nodes << Node.new(name)
   end
 
   def add_edge(src, dest, weight = 0)
@@ -78,5 +81,9 @@ class Graph
   
   def print_edges
     @edges.each { |edge| puts "[Edge] from:\"#{edge.src}\", to:\"#{edge.dest}\", weight:#{edge.weight}" }
+  end
+  
+  def print_nodes
+    @nodes.each { |node| puts "[Node] name:\"#{node.name}\", successors:\"#{node.successors}\"" }
   end
 end
