@@ -86,7 +86,14 @@ class Graph
   
   def print_nodes
     @nodes.each_value do |node|
-      puts "[Node] name:\"#{node.name}\", next:\"#{node.next[0].name}\""
+      print "[Node] name:\"#{node.name}\", next:\""
+      
+      node.next.each_index do |index|
+        print node.next[index].name
+        print ", " unless index + 1 == node.next.size # only if we're not at the last index
+      end
+      
+      print "\"\n"
     end
   end
 end
