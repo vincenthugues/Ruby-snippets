@@ -10,7 +10,7 @@ class Graph
   
   def initialize(graph_type=:undirected, filename = '')
     @graph_type = graph_type
-    @nodes = [] # actual graph nodes
+    @nodes = {} # actual graph nodes
     @vertices = [] # used to store/search
     @edges = [] # used to store/search
     @adjacency_matrix = nil
@@ -64,11 +64,12 @@ class Graph
   
   def add_vertex(name, x, y)
     @vertices << Vertex.new(name, x.to_i, y.to_i)
-    @nodes << Node.new(name)
+    @nodes[name] = Node.new(name)
   end
 
   def add_edge(src, dest, weight = 0)
     @edges << Edge.new(src, dest, weight.to_i)
+    @nodes[src].add_next(@nodes[dest])
   end
   
   def print_adjacency_matrix
@@ -84,6 +85,8 @@ class Graph
   end
   
   def print_nodes
-    @nodes.each { |node| puts "[Node] name:\"#{node.name}\", successors:\"#{node.successors}\"" }
+    @nodes.each_value do |node|
+      puts "[Node] name:\"#{node.name}\", next:\"#{node.next[0].name}\""
+    end
   end
 end
