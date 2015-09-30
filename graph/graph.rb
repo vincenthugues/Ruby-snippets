@@ -72,6 +72,10 @@ class Graph
     @nodes[src].add_next(@nodes[dest])
   end
   
+  def [](node_name)
+    @nodes[node_name]
+  end
+  
   def print_adjacency_matrix
     @adjacency_matrix.print_matrix
   end
